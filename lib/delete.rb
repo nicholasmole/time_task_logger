@@ -25,15 +25,15 @@ class Delete
 				while self.class.make_sure_value_exist?(@make_sure_you_say_yes) && self.class.make_sure_value_says_yes?(@make_sure_you_say_yes)
 					puts " "
 					puts " "
-					puts "Warning deleting entry: "
-					puts "Please type \"yes\" to verify"
+					puts "\tWarning deleting entry: "
+					puts "\tPlease type \"yes\" to verify"
 					@make_sure_you_say_yes = Awaiting.needs_inputs("Type \"yes\" to continue or \"no\" to exit \n")
 				end
 
 				if @make_sure_you_say_yes.eql? "yes"
 					self.delete_a_csv_entry(@gets_user_input)
 				else
-					puts "delete cancelled"
+					puts "\tdelete cancelled"
 				end	
 			end
 
@@ -43,17 +43,15 @@ class Delete
 			until (!self.class.make_sure_value_exist?(@make_sure_you_say_yes) && self.class.make_sure_value_says_yes?(@make_sure_you_say_yes)) do
 				puts " "
 				puts " "
-				puts "Warning deleting entry: "
-				puts "Please type \"yes\" to verify"
+				puts "\tWarning deleting entry: "
+				puts "\tPlease type \"yes\" to verify"
 				@make_sure_you_say_yes = Awaiting.needs_inputs("Type \"yes\" to continue or \"no\" to exit \n")
 			end
-			puts !self.class.make_sure_value_exist?(@make_sure_you_say_yes)
-			puts !self.class.make_sure_value_says_yes?(@make_sure_you_say_yes)
 
 			if @make_sure_you_say_yes.eql? "yes"
 				self.delete_a_csv_entry(argv[1])
 			else
-				puts "delete cancelled"
+				puts "\tdelete cancelled"
 			end	
 		end # does_argument_have_key?
 	end # initialize
@@ -72,7 +70,7 @@ class Delete
 	end
 
 	def delete_a_csv_entry(entry_key)
-
+		puts "\t*** Deleting:: #{entry_key} ***"
 		if Change_CSV.check_csv_exist
 
 			updated_csv  = []

@@ -21,7 +21,7 @@ class NewTask
 			unless @gets_user_input.eql? "exit"
 				self.make_a_new_csv_entry(@gets_user_input)
 			else
-				puts "New Entry Exited"
+				puts "\tNew Entry Exited"
 			end
 
 
@@ -40,11 +40,12 @@ class NewTask
 
 	def make_a_new_csv_entry(entryName)
 		@entry_is_unique = true
+		puts "\tCreating new Entry:: #{entryName}"
 		if Change_CSV.check_csv_exist
 			CSV.foreach("#{Path.get_csv_path}/#{Today.getToday}.csv", headers: false) do |row|
 			
-        if row[0].eql? entryName
-          puts "This entry already exist"
+				if row[0].eql? entryName
+          puts "\t*** This entry already exist ***"
           @entry_is_unique = false
 				end
 				
@@ -52,7 +53,7 @@ class NewTask
     end
 
 		unless !@entry_is_unique
-      puts "Creating new entry:-------------------> "
+      puts "\tCreating new entry:-------------------> "
       CSV.open("#{Path.get_csv_path}/#{Today.getToday}.csv",'a+',headers: false) do |csv|
         csv << [entryName, Today.get_current_time, "--endtime--", "--notes empty--", "---calc time---"]
 			end
