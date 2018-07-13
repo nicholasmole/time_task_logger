@@ -1,1 +1,6 @@
+# exclude everything
 .DS_Store
+csv_files/*
+
+# exception to the rule
+!csv_files/.gitkeep 
